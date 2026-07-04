@@ -20,6 +20,7 @@ import seaborn as sns
 
 global precision, recall, fscore, accuracy
 
+'''
 X = np.load("model/X.txt.npy")
 Y = np.load("model/Y.txt.npy")
 indices = np.arange(X.shape[0])
@@ -27,14 +28,17 @@ np.random.shuffle(indices)
 X = X[indices]
 Y = Y[indices]
 
+'''
 
 with open('model/tfidf.txt', 'rb') as file:
     tfidf = pickle.load(file)
 file.close()
+'''
 X = tfidf.fit_transform(X).toarray()
 print(X.shape)
 X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.2)
-
+'''
+'''
 if os.path.exists('model/svm.txt'):
     with open('model/svm.txt', 'rb') as file:
         svm_cls = pickle.load(file)
@@ -56,6 +60,8 @@ else:
     with open('model/lgbm.txt', 'wb') as file:
         pickle.dump(lgbm_cls, file)
     file.close()
+
+    '''
 
 with open('model/rf.txt', 'rb') as file:
     rf_cls = pickle.load(file)
@@ -197,9 +203,6 @@ def AdminLoginAction(request):
         else:
             context= {'data':'Invalid Login'}
             return render(request, 'AdminLogin.html', context)
-
-
-
 
 
 
